@@ -25,6 +25,72 @@
             --font-mono: 'JetBrains Mono', monospace;
         }
 
+        /* ─── ANIMATIONS ──────────────────────────────────────── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes expandOpen {
+            from {
+                opacity: 0;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            to {
+                opacity: 1;
+                max-height: 1000px;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 229, 255, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
+            }
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                border-right-color: var(--accent);
+                box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
+            }
+
+            50% {
+                border-right-color: var(--accent);
+                box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -37,6 +103,7 @@
             font-family: var(--font-ar);
             min-height: 100vh;
             direction: rtl;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         /* ─── HEADER ─────────────────────────────────────────── */
@@ -49,6 +116,8 @@
             z-index: 100;
             backdrop-filter: blur(12px);
             text-align: right;
+            animation: slideInLeft 0.6s ease-out;
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.05);
         }
 
         header h1 {
@@ -56,6 +125,7 @@
             font-weight: 900;
             color: var(--accent);
             font-family: var(--font-ar);
+            animation: pulse 3s infinite;
         }
 
         header p {
@@ -85,7 +155,7 @@
             font-family: var(--font-ar);
             font-size: 0.82rem;
             font-weight: 700;
-            transition: all .2s;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .tab.active,
@@ -113,6 +183,7 @@
             border-bottom: 1px solid var(--border);
             direction: ltr;
             text-align: left;
+            animation: slideInLeft 0.6s ease-out;
         }
 
         .search-bar {
@@ -126,13 +197,16 @@
             font-size: 0.88rem;
             margin-bottom: 14px;
             outline: none;
-            transition: border-color .2s;
+            transition: all 0.3s ease;
             direction: rtl;
             text-align: right;
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .search-bar:focus {
             border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .search-bar::placeholder {
@@ -157,7 +231,59 @@
             padding: 14px 16px;
             border-right: 3px solid var(--accent);
             border-left: none;
-            transition: border-color .2s;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: fadeInUp 0.6s ease-out backwards;
+            cursor: pointer;
+        }
+
+        .topic-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .topic-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .topic-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .topic-card:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .topic-card:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        .topic-card:nth-child(6) {
+            animation-delay: 0.35s;
+        }
+
+        .topic-card:nth-child(7) {
+            animation-delay: 0.4s;
+        }
+
+        .topic-card:nth-child(8) {
+            animation-delay: 0.45s;
+        }
+
+        .topic-card:nth-child(9) {
+            animation-delay: 0.5s;
+        }
+
+        .topic-card:nth-child(10) {
+            animation-delay: 0.55s;
+        }
+
+        .topic-card:nth-child(n+11) {
+            animation-delay: 0.6s;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-right-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.15);
         }
 
         .topic-card:nth-child(2n) {
@@ -178,12 +304,17 @@
             gap: 10px;
             cursor: pointer;
             direction: rtl;
+            transition: all 0.2s ease;
+        }
+
+        .topic-header:hover {
+            color: var(--accent);
         }
 
         .toggle-icon {
             color: var(--muted);
             font-size: 1.1rem;
-            transition: transform .3s;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             flex-shrink: 0;
             margin-left: auto;
         }
@@ -199,6 +330,13 @@
             white-space: nowrap;
             direction: ltr;
             flex-shrink: 0;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .topic-card:hover .topic-num {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3);
         }
 
         .topic-card:nth-child(2n) .topic-num {
@@ -223,6 +361,11 @@
             font-family: var(--font-en);
             direction: ltr;
             text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .topic-card:hover .topic-title {
+            color: var(--accent);
         }
 
         /* ─── TOPIC BODY ──────────────────────────────────────── */
@@ -235,10 +378,12 @@
             direction: rtl;
             text-align: right;
             font-family: var(--font-ar);
+            animation: expandOpen 0.4s ease-out forwards;
         }
 
         .topic-body.open {
             display: block;
+            animation: expandOpen 0.4s ease-out forwards;
         }
 
         .topic-body .tag {
@@ -253,6 +398,13 @@
             margin: 2px 2px;
             direction: ltr;
             unicode-bidi: embed;
+            transition: all 0.2s ease;
+        }
+
+        .topic-body .tag:hover {
+            background: #2a2a3a;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+            transform: scale(1.05);
         }
 
         .label {
@@ -264,6 +416,7 @@
             letter-spacing: .3px;
             font-family: var(--font-ar);
             text-align: right;
+            animation: slideInLeft 0.5s ease-out;
         }
 
         .bullet {
@@ -271,12 +424,19 @@
             margin-left: 0;
             margin-top: 6px;
             list-style-position: outside;
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .bullet li {
             margin-bottom: 6px;
             direction: rtl;
             text-align: right;
+            transition: all 0.2s ease;
+        }
+
+        .bullet li:hover {
+            transform: translateX(-5px);
+            color: var(--accent);
         }
 
         pre.codeblock {
@@ -295,6 +455,14 @@
             word-break: break-all;
             unicode-bidi: isolate;
             overflow-x: auto;
+            animation: fadeInUp 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        pre.codeblock:hover {
+            border-left-color: var(--accent);
+            box-shadow: 0 0 15px rgba(168, 255, 62, 0.1);
+            background: #0d0d15;
         }
 
         /* ─── QCM CARDS ───────────────────────────────────────── */
@@ -358,10 +526,8 @@
 
     <header>
         <h1>🔐 Security QCM – دليل المراجعة</h1>
-        <p>// 17 موضوع + 50 سؤال QCM مع الإجابات</p>
         <div class="tabs">
-            <button class="tab active" onclick="showTab('topics')">📚 المواضيع</button>
-            <button class="tab" onclick="showTab('qcm')">❓ إجابات QCM</button>
+            <button class="tab active" onclick="showTab('topics')">📚 المواضيع والأسئلة</button>
         </div>
     </header>
 
@@ -396,6 +562,12 @@
                         </ul>
                         <span class="label">استعمالاته</span>
                         تشخيص مشاكل الشبكة، كشف الهجمات، تعلم البروتوكولات.
+                        <span class="label">❓ Wireshark use?</span>
+                        Captures and analyzes network packets in real-time — يستخدم لـ network troubleshooting، protocol
+                        analysis، وكشف الهجمات.
+                        <span class="label">❓ What can be seen when capturing Telnet vs SSH?</span>
+                        مع Telnet، كل البيانات (including passwords) visible بـplain text في الـcapture. مع SSH، كل شي
+                        مشفر والـattacker يشوف فقط الـpackets بدون فهم محتواهم.
                     </div>
                 </div>
 
@@ -422,6 +594,12 @@
                         </ul>
                         <span class="label">الاستعمال</span>
                         Penetration testing، network auditing، security assessment.
+                        <span class="label">❓ Nmap purpose?</span>
+                        Network discovery and port scanning — يحدد الـhosts المتصلة، الـports المفتوحة، الـservices
+                        والـOS على الشبكة.
+                        <span class="label">❓ الفرق بين -sS و -sT في Nmap؟</span>
+                        -sS = SYN scan (stealth) — ما يكملش TCP handshake، أسرع وأقل noisy. -sT = full connect scan —
+                        يكمل الـhandshake بالكامل.
                     </div>
                 </div>
 
@@ -447,6 +625,12 @@
                         </ul>
                         <span class="label">كيفاش تحمي راسك منه؟</span>
                         تغلق الـports غير الضرورية، تستعمل firewall، تحمي الخدمات بـpassword وتشفير.
+                        <span class="label">❓ Shodan main function?</span>
+                        Search engine for internet-connected devices — يفهرس servers، cameras، routers، IoT devices
+                        المكشوفة بدون حماية.
+                        <span class="label">❓ كيفاش Shodan تجمع البيانات؟</span>
+                        Shodan تسكان الإنترنت باستمرار، تجمع الـbanners (معلومات من الخدمات)، وتفهرسها في قاعدة بيانات
+                        قابلة للبحث.
                     </div>
                 </div>
 
@@ -470,6 +654,8 @@
                         </ul>
                         <span class="label">Packet Tracer</span>
                         نشبه هاذ العملية بـsimulation — نشوف الـpackets وهي تمشي بين الأجهزة خطوة خطوة.
+                        <span class="label">❓ ARP protocol شنو الهدف ديالو؟</span>
+                        تحويل IP addresses إلى MAC addresses في نفس الشبكة (LAN) — ضروري حتى يقدر الـdevices توصل بعضهم.
                     </div>
                 </div>
 
@@ -494,6 +680,9 @@
                         </ul>
                         <span class="label">الحماية</span>
                         Dynamic ARP Inspection (DAI)، Static ARP entries، HTTPS.
+                        <span class="label">❓ ARP poisoning شنو النتيجة ديالو على الشبكة؟</span>
+                        Man-in-the-Middle (MitM) attack — كل الترافيك بين الضحية والـgateway يعدي عند المهاجم يقدر يسرقو
+                        ويعدلو.
                     </div>
                 </div>
 
@@ -516,6 +705,11 @@
                         </ul>
                         <span class="label">الحماية</span>
                         Account lockout، CAPTCHA، rate limiting، passwords طويلة ومعقدة، MFA.
+                        <span class="label">❓ Characteristic of brute-force?</span>
+                        يـexhaustive وguaranteed يلقى الـpassword في الآخر، لكن slow جداً مع passwords طويلة ومعقدة.
+                        <span class="label">❓ Dictionary attack vs Pure Brute Force؟</span>
+                        Dictionary = استخدام قائمة passwords شائعة (أسرع لكن قد يفشل). Pure Brute = كل التركيبات الممكنة
+                        (أبطأ لكن guaranteed يشتغل).
                     </div>
                 </div>
 
@@ -541,6 +735,9 @@
                         سرقة credentials، intercept traffic، تركيب malware.
                         <span class="label">الحماية</span>
                         تحقق من الـcertificate (HTTPS)، استعمل VPN، تجنب الـWiFi العام.
+                        <span class="label">❓ Evil Twin attack كيفاش الضحية توقع فيه؟</span>
+                        الضحية جهازها يفتش عن الشبكة اللي كانت متوصلة فيها قبل (remembered networks). المهاجم يدير AP
+                        بنفس الـSSID والـsignal أقوى فالضحية توصل به بدون ما تسأل.
                     </div>
                 </div>
 
@@ -566,6 +763,9 @@
                         </ul>
                         <span class="label">الحماية</span>
                         Prepared statements، Parameterized queries، Input validation، Least privilege.
+                        <span class="label">❓ SQL Injection types - In-band vs Blind vs Out-of-band؟</span>
+                        In-band = النتائج visible مباشرة. Blind = ما يرجع نتائج بصح المهاجم يقدر يستنتج بـtrue/false
+                        tests. Out-of-band = يستعمل قناة ثانية (مثلاً DNS exfiltration).
                     </div>
                 </div>
 
@@ -589,6 +789,9 @@
                         سرقة cookies/sessions، keylogging، redirect لمواقع خبيثة.
                         <span class="label">الحماية</span>
                         Input sanitization، Output encoding، Content Security Policy (CSP)، HttpOnly cookies.
+                        <span class="label">❓ XSS types - Stored vs Reflected vs DOM-based؟</span>
+                        Stored = الـscript يتخزن في الـDB وينفذ لكل المستخدمين. Reflected = في الـURL ويرجع مباشرة في
+                        الـHTML. DOM-based = يغير الـDOM على الـclient side بدون server involvement.
                     </div>
                 </div>
 
@@ -609,6 +812,9 @@
                             <li><span class="tag">Spyware</span> — يتجسس ويسرق معلومات</li>
                             <li><span class="tag">Rootkit</span> — يخفي نفسه ويتحكم في النظام</li>
                         </ul>
+                        <span class="label">❓ Malware categories - أي واحد يتكاثر تلقائي؟</span>
+                        Worm — يتكاثر وحده بدون تدخل بشري (عكس Virus اللي يحتاج تنفيذ يدوي). Virus و Worm كلهم malware
+                        بصح Worm أخطر.
                         <span class="label">الموضوع: إنشاء فيروس وإضافته لتطبيق</span>
                         الـTrojan نموذج — يبدو تطبيق عادي لكنه يحتوي كود خبيث في الخلفية.
                     </div>
@@ -635,6 +841,9 @@
                         Admin ← كل الصلاحيات | Editor ← قراءة وكتابة | Viewer ← قراءة فقط
                         <span class="label">الفائدة</span>
                         سهولة الإدارة، تقليل الخطر، امتثال أسهل للـcompliance.
+                        <span class="label">❓ RBAC principle - Least Privilege شنو معناه؟</span>
+                        كل مستخدم يأخذ الحد الأدنى من الـpermissions اللي يحتاجها لـrole ديالو. مثلاً Viewer ما يقدر
+                        يعدل، Admin بس يقدر يحذف.
                     </div>
                 </div>
 
@@ -661,6 +870,9 @@
                         Exploit = الباب اللي تدخل منه | Payload = شنو دخلت تدير
                         <span class="label">الاستعمال الشرعي</span>
                         Penetration testing مرخص، اختبار أنظمة الحماية.
+                        <span class="label">❓ Exploit vs Payload في Metasploit؟</span>
+                        Exploit = الكود اللي يستغل الثغرة (الباب). Payload = ما يتنفذ بعد النجاح (reverse shell,
+                        Meterpreter, etc).
                     </div>
                 </div>
 
@@ -684,7 +896,10 @@
                         وضعين: IDS (يسجل فقط) وIPS (يبلوك).
                         <span class="label">Zeek (Bro سابقاً)</span>
                         <strong>Network Security Monitor</strong> — مش IDS تقليدي، يحلل الترافيك ويولد logs مفصلة
-                        (connections, DNS, HTTP). Focus على الـanalysis والـbehavior مش الـsignatures.
+                        (connections, DNS, HTTP). Focus على الـanalysis والـbehavior مش الـsignatu
+                        <span class="label">❓ IPS advantage over IDS؟</span>
+                        IPS actively blocks/drops الـmalicious traffic في real-time. IDS فقط detects ويرسل alerts
+                        (passive). IPS = IDS + blocking.res.
                         <span class="label">الفرق: Suricata مقابل Zeek</span>
                         Suricata = detection/blocking بـsignatures | Zeek = تحليل عميق للـbehavior
                     </div>
@@ -709,6 +924,9 @@
                             <li><span class="tag">Least Privilege</span> — الـDB user ماعندوش أكثر من اللي يحتاج</li>
                             <li>تجنب <span class="tag">Dynamic SQL</span> — ما تبنيش queries من strings مباشرة</li>
                         </ul>
+                        <span class="label">❓ Prevent SQL injection؟</span>
+                        Use Prepared Statements / Parameterized Queries — تفصل الـSQL code عن الـuser data بحيث
+                        الـinjection مستحيلة.
                     </div>
                 </div>
 
@@ -734,6 +952,9 @@
                         <span class="label">أوامر أساسية</span>
                         <pre class="codeblock">openssl enc -aes-256-cbc -in file.txt -out file.enc
 openssl dgst -sha256 file.txt</pre>
+                        <span class="label">❓ OpenSSL usage?</span>
+                        Encrypting/decrypting data، generating SSL/TLS certificates، hashing files، creating key pairs
+                        (RSA/AES operations).
                     </div>
                 </div>
 
@@ -757,6 +978,8 @@ openssl dgst -sha256 file.txt</pre>
                             <li>تفعيل <span class="tag">fail2ban</span> للحماية من brute force</li>
                             <li>إعداد <span class="tag">SELinux</span> أو <span class="tag">AppArmor</span></li>
                         </ul>
+                        <span class="label">❓ Most important SSH hardening practice؟</span>
+                        Disable SSH root login وتستخدم SSH keys بدل passwords. يقلل جداً من brute force attacks.
                     </div>
                 </div>
 
@@ -780,6 +1003,9 @@ openssl dgst -sha256 file.txt</pre>
                         <span class="label">الفرق مع Nmap</span>
                         <span class="tag">Nmap</span> = اكتشاف فقط | <span class="tag">Nessus</span> = اكتشاف + تقييم
                         الثغرات + توصيات
+                        <span class="label">❓ Nessus vs Nmap - الفرق؟</span>
+                        Nmap = network discovery و port scanning فقط (detection). Nessus = vulnerability assessment
+                        (detection + severity ranking + remediation recommendations).
                         <span class="label">الاستعمال</span>
                         Vulnerability assessment، compliance checks، penetration testing.
                     </div>
@@ -788,91 +1014,12 @@ openssl dgst -sha256 file.txt</pre>
             </div><!-- /topic-grid -->
         </div><!-- /tab-topics -->
 
-        <!-- ========== QCM ========== -->
-        <div id="tab-qcm" class="hidden">
-            <p class="section-title">// 50 questions with correct answers</p>
-            <input class="search-bar" id="qcmSearch" placeholder="🔍 ابحث عن سؤال..." oninput="filterQCM()">
-            <div class="qcm-grid" id="qcmGrid"></div>
-        </div>
-
     </main>
 
     <script>
-        const qcmData = [
-            { q: "A brute-force attack consists of:", a: "Trying all possible combinations of passwords/keys systematically until the correct one is found." },
-            { q: "What is an Evil Twin attack?", a: "A rogue Wi-Fi access point that mimics a legitimate AP (same SSID) to intercept victims' traffic." },
-            { q: "A SQL Injection attack works by:", a: "Inserting malicious SQL code into input fields to manipulate database queries and bypass authentication or extract data." },
-            { q: "Cross-Site Scripting (XSS):", a: "Injecting malicious client-side scripts (JavaScript) into web pages viewed by other users to steal sessions or cookies." },
-            { q: "Malware that disguises itself as legitimate software:", a: "Trojan (Trojan Horse) — appears harmless but contains malicious code." },
-            { q: "Malware that encrypts files and demands payment:", a: "Ransomware — encrypts victim's files and demands a ransom (usually cryptocurrency) for decryption." },
-            { q: "Attack that tries all combinations:", a: "Brute-Force Attack." },
-            { q: "Characteristic of brute-force:", a: "It is exhaustive and guaranteed to find the password eventually, but very slow for long/complex passwords." },
-            { q: "Purpose of Nmap:", a: "Network discovery and port scanning — identifies hosts, open ports, running services, and OS on a network." },
-            { q: "Mechanism to prove identity:", a: "Authentication — verifying who you are (password, biometrics, certificate, MFA)." },
-            { q: "Shodan main function:", a: "Search engine for internet-connected devices — indexes servers, cameras, routers, and IoT devices exposed online." },
-            { q: "Nessus main function:", a: "Vulnerability scanner — detects known security vulnerabilities in systems and networks, ranks them by severity." },
-            { q: "Nessus use in assessment:", a: "Performs automated vulnerability assessments by scanning systems and comparing findings against CVE databases." },
-            { q: "Shodan description:", a: "A search engine that crawls the internet and indexes information about exposed devices and services (banners, versions, open ports)." },
-            { q: "Wireshark use:", a: "Captures and analyzes network packets in real-time — used for network troubleshooting, protocol analysis, and detecting attacks." },
-            { q: "ARP poisoning:", a: "Attacker sends forged ARP replies to associate their MAC address with a legitimate IP, enabling Man-in-the-Middle attacks." },
-            { q: "IPS advantage over IDS:", a: "IPS actively blocks/drops malicious traffic in real-time, while IDS only detects and alerts (passive)." },
-            { q: "System that blocks traffic:", a: "IPS (Intrusion Prevention System) — actively blocks malicious traffic. A Firewall also blocks based on rules." },
-            { q: "Evil twin attack involves:", a: "Creating a rogue Wi-Fi AP with the same SSID as a legitimate network to trick users into connecting to it." },
-            { q: "Goal of evil twin:", a: "Intercepting network traffic, stealing credentials, performing MitM attacks, or injecting malware." },
-            { q: "Exploit in Metasploit:", a: "A module that takes advantage of a specific vulnerability in a target system to gain unauthorized access." },
-            { q: "HTTPS mitigates:", a: "Eavesdropping and MitM attacks by encrypting traffic — mitigates ARP poisoning data theft, Evil Twin interception, and session hijacking." },
-            { q: "IDS vs IPS:", a: "IDS = passive detection only (alerts). IPS = active detection + prevention (blocks traffic). IPS is IDS + blocking capability." },
-            { q: "Metasploit usage:", a: "Used for penetration testing — it automates exploitation of vulnerabilities using exploits and payloads to test system security." },
-            { q: "IDS analyzing traffic:", a: "IDS inspects network packets against known attack signatures or behavioral baselines and generates alerts on matches." },
-            { q: "OpenSSL library:", a: "Open-source cryptographic library implementing SSL/TLS protocols and providing tools for encryption, hashing, and certificate management." },
-            { q: "OpenSSL usage:", a: "Encrypting/decrypting data, generating SSL/TLS certificates, hashing files, creating key pairs (RSA/AES operations)." },
-            { q: "Penetration testing tool:", a: "Metasploit, Nmap, Nessus, Burp Suite, Kali Linux — tools used to simulate attacks and find vulnerabilities." },
-            { q: "RBAC principle:", a: "Least Privilege — users receive only the minimum permissions needed for their role, reducing attack surface." },
-            { q: "Role in RBAC:", a: "A named collection of permissions assigned to users (e.g., Admin, Editor, Viewer) — access is granted by role, not individual." },
-            { q: "Suricata modes:", a: "IDS mode (detect & log only) and IPS mode (detect & block traffic inline). Also supports NSM (Network Security Monitoring)." },
-            { q: "Suricata use:", a: "Real-time network traffic analysis using rules to detect/prevent intrusions, malware, and protocol anomalies." },
-            { q: "Tool for behavioral analysis:", a: "Zeek (formerly Bro) — analyzes network behavior and generates detailed logs rather than using signature-based detection." },
-            { q: "Zeek description:", a: "A passive network security monitor that analyzes traffic and produces rich logs (HTTP, DNS, SSL, connections) for forensic analysis." },
-            { q: "Zeek focus:", a: "Network behavior and traffic analysis — focuses on understanding what happened on the network rather than just blocking threats." },
-            { q: "Payload in Metasploit:", a: "The code that runs on the target after successful exploitation (e.g., reverse shell, Meterpreter session, command execution)." },
-            { q: "Penetration meaning:", a: "Authorized simulated attack on a system to find vulnerabilities before malicious attackers do — ethical hacking." },
-            { q: "Shodan usage:", a: "Discovering exposed devices, finding misconfigured services, researching attack surface of organizations, IoT security assessment." },
-            { q: "Prevent SQL injection:", a: "Use Prepared Statements / Parameterized Queries — separates SQL code from user data so injection is impossible." },
-            { q: "Practice to avoid (SQLi):", a: "Building SQL queries by string concatenation with user input (dynamic SQL without parameterization)." },
-            { q: "Practice to avoid (repeated):", a: "Storing passwords in plain text, using default credentials, trusting user input without validation." },
-            { q: "Prevent brute force:", a: "Account lockout after N attempts, CAPTCHA, rate limiting, strong password policy, MFA (Multi-Factor Authentication)." },
-            { q: "Prevent Shodan indexing:", a: "Close unnecessary ports, use firewalls, require authentication on all services, use non-standard ports, implement TLS." },
-            { q: "Exploit role:", a: "To leverage a specific vulnerability in a target system to gain unauthorized access or execute arbitrary code." },
-            { q: "Exploit vs payload:", a: "Exploit = the method to break in (the key). Payload = what you do once inside (the action after entry)." },
-            { q: "False positive:", a: "When an IDS/IPS incorrectly flags legitimate traffic as malicious — a benign event incorrectly identified as an attack." },
-            { q: "Most dangerous for IDS:", a: "False Negatives — when real attacks are NOT detected. Also: encrypted traffic (IDS can't inspect), evasion techniques." },
-            { q: "Protection against brute force:", a: "MFA, strong long passwords, account lockout, CAPTCHA, IP-based rate limiting, fail2ban." },
-            { q: "Reduce XSS risk (user):", a: "Keep browser updated, be cautious of suspicious links, use browser extensions (NoScript), don't trust unknown sites." },
-            { q: "0% security risk concept:", a: "'Zero risk' is impossible in cybersecurity — you can only reduce risk, not eliminate it entirely (risk mitigation, not risk elimination)." },
-        ];
-
-        function renderQCM(data) {
-            const grid = document.getElementById('qcmGrid');
-            grid.innerHTML = data.map((item, i) => `
-    <div class="q-card" data-q="${item.q.toLowerCase()}">
-    <div class="q-num" dir="ltr">Q${String(i + 1).padStart(2, '0')}</div>
-    <div class="q-text" dir="ltr">${item.q}</div>
-    <div class="q-answer" dir="ltr">
-        <span class="ans-label">✓ ANSWER</span>
-        ${item.a}
-    </div>
-    </div>
-`).join('');
-        }
-        renderQCM(qcmData);
-
         function showTab(name) {
-            document.getElementById('tab-topics').classList.add('hidden');
-            document.getElementById('tab-qcm').classList.add('hidden');
-            document.getElementById('tab-' + name).classList.remove('hidden');
-            document.querySelectorAll('.tab').forEach((t, i) => {
-                t.classList.toggle('active', (name === 'topics' && i === 0) || (name === 'qcm' && i === 1));
-            });
+            document.getElementById('tab-topics').classList.remove('hidden');
+            document.querySelectorAll('.tab').forEach(t => t.classList.add('active'));
         }
 
         function toggle(header) {
@@ -886,13 +1033,6 @@ openssl dgst -sha256 file.txt</pre>
             const q = document.getElementById('topicSearch').value.toLowerCase();
             document.querySelectorAll('.topic-card').forEach(card => {
                 card.style.display = card.dataset.title.toLowerCase().includes(q) ? '' : 'none';
-            });
-        }
-
-        function filterQCM() {
-            const q = document.getElementById('qcmSearch').value.toLowerCase();
-            document.querySelectorAll('.q-card').forEach(card => {
-                card.style.display = card.dataset.q.includes(q) ? '' : 'none';
             });
         }
     </script>

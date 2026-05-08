@@ -3,7 +3,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     // For security, the API key should not live in client JS.
     // The client will call a local proxy which forwards requests to Groq.
-    const endpoint = 'http://localhost:3000/api/chat';
+    // Use the page host so mobile devices can reach the proxy when the
+    // site is opened using the computer's LAN IP (e.g. http://192.168.1.5:5500).
+    const pageHost = location.hostname;
+    const protocol = location.protocol; // usually 'http:'
+    const endpoint = `${protocol}//${pageHost}:3000/api/chat`;
 
     const input = document.getElementById('ai-msg');
     const sendBtn = document.getElementById('ai-send');
@@ -47,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             output.textContent = shortText;
         } catch (err) {
             console.error('Fetch error:', err);
-            output.textContent = 'خطأ في الاتصال: ' + (err.message || err) + '\n(تأكد أن الـproxy يعمل: node server.js)';
+            output.textContent = 'خطأ في الاتصال: ' + (err.message || err);
         }
     }
 

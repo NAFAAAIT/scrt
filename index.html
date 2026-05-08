@@ -550,6 +550,12 @@
                         <span class="label">شنو هو؟</span>
                         Wireshark هو <strong>network packet analyzer</strong> — يلتقط ويحلل كل الـpackets اللي تعدي على
                         الشبكة في real-time.
+                        <span class="label">نقاط مهمة</span>
+                        <ul class="bullet">
+                            <li>يمكن استعماله لفحص headers وpayloads، وفهم الطبقات (L2-L7).</li>
+                            <li>عند تحليل ترافيك مشفر (HTTPS/SSH) تحتاج مفاتيح أو فك تشفير TLS لرؤية المحتوى.</li>
+                            <li>احذر من حفظ أو مشاركة الـcaptures لأنه يحتوي على بيانات حساسة (passwords، tokens).</li>
+                        </ul>
                         <span class="label">كيفاش يشتغل؟</span>
                         يحط الـnetwork interface في <em>promiscuous mode</em> ← يلتقط كل الـframes ← يعرض محتوياتها
                         (protocol, source, destination, data).
@@ -594,6 +600,12 @@
                         </ul>
                         <span class="label">الاستعمال</span>
                         Penetration testing، network auditing، security assessment.
+                        <span class="label">نصائح عملية</span>
+                        <ul class="bullet">
+                            <li>ابدأ بـping sweep ثم استخدم -sV و -O للحصول على صورة أوضح عن الخدمات والـOS.</li>
+                            <li>استعمل خيارات الإخفاء وعدّل الـtiming (`-T`) لتقليل الاكتشاف من أنظمة الـIDS.</li>
+                            <li>حترم القوانين — لا تقم بسكان شبكات بدون إذن صريح.</li>
+                        </ul>
                         <span class="label">❓ Nmap purpose?</span>
                         Network discovery and port scanning — يحدد الـhosts المتصلة، الـports المفتوحة، الـservices
                         والـOS على الشبكة.
@@ -625,6 +637,11 @@
                         </ul>
                         <span class="label">كيفاش تحمي راسك منه؟</span>
                         تغلق الـports غير الضرورية، تستعمل firewall، تحمي الخدمات بـpassword وتشفير.
+                        <span class="label">ملاحظات</span>
+                        <ul class="bullet">
+                            <li>Shodan يظهر بيانات الـbanners — تحديث الخدمات وإخفاء الـbanners يقلل من المخاطر.</li>
+                            <li>افحص دورياً نطاقك باستخدام Shodan وتحلّ بالاستجابة السريعة لإصلاح المشكلات.</li>
+                        </ul>
                         <span class="label">❓ Shodan main function?</span>
                         Search engine for internet-connected devices — يفهرس servers، cameras، routers، IoT devices
                         المكشوفة بدون حماية.
@@ -654,6 +671,11 @@
                         </ul>
                         <span class="label">Packet Tracer</span>
                         نشبه هاذ العملية بـsimulation — نشوف الـpackets وهي تمشي بين الأجهزة خطوة خطوة.
+                        <span class="label">نقاط عملية</span>
+                        <ul class="bullet">
+                            <li>الـARP مفيد للتعلم لكنه عرضة للتزوير؛ راقب التغييرات المفاجئة في الـARP cache.</li>
+                            <li>تأكد من فهم broadcast domain والـswitch behavior عند محاكاة الشبكات.</li>
+                        </ul>
                         <span class="label">❓ ARP protocol شنو الهدف ديالو؟</span>
                         تحويل IP addresses إلى MAC addresses في نفس الشبكة (LAN) — ضروري حتى يقدر الـdevices توصل بعضهم.
                     </div>
@@ -680,6 +702,11 @@
                         </ul>
                         <span class="label">الحماية</span>
                         Dynamic ARP Inspection (DAI)، Static ARP entries، HTTPS.
+                        <span class="label">ممارسات وقائية</span>
+                        <ul class="bullet">
+                            <li>فعّل DAI على الـswitches المدعومة، واستعمل static ARP للمواد الحساسة فقط.</li>
+                            <li>راقب سجلات الشبكة لاكتشاف تحديثات ARP غير متوقعة أو تكرار عناوين MAC.</li>
+                        </ul>
                         <span class="label">❓ ARP poisoning شنو النتيجة ديالو على الشبكة؟</span>
                         Man-in-the-Middle (MitM) attack — كل الترافيك بين الضحية والـgateway يعدي عند المهاجم يقدر يسرقو
                         ويعدلو.
@@ -705,6 +732,13 @@
                         </ul>
                         <span class="label">الحماية</span>
                         Account lockout، CAPTCHA، rate limiting، passwords طويلة ومعقدة، MFA.
+                        <span class="label">توصيات</span>
+                        <ul class="bullet">
+                            <li>استخدم مخازن كلمات مرور قوية للـhashing مع salt (bcrypt/argon2) لتقليل فعالية هجمات
+                                الـrainbow.</li>
+                            <li>راقب نمط المحاولات واحذر من المحاولات الموزّعة عبر عدة نقاط (distributed brute-force).
+                            </li>
+                        </ul>
                         <span class="label">❓ Characteristic of brute-force?</span>
                         يـexhaustive وguaranteed يلقى الـpassword في الآخر، لكن slow جداً مع passwords طويلة ومعقدة.
                         <span class="label">❓ Dictionary attack vs Pure Brute Force؟</span>
@@ -735,6 +769,11 @@
                         سرقة credentials، intercept traffic، تركيب malware.
                         <span class="label">الحماية</span>
                         تحقق من الـcertificate (HTTPS)، استعمل VPN، تجنب الـWiFi العام.
+                        <span class="label">ملاحظات</span>
+                        <ul class="bullet">
+                            <li>تفعيل 802.1X وWPA3 حيثما أمكن يقلل من خطر Evil Twin.</li>
+                            <li>لا تقم بالاتصال التلقائي بشبكات محلية محفوظة دون التأكد من الـBSSID.</li>
+                        </ul>
                         <span class="label">❓ Evil Twin attack كيفاش الضحية توقع فيه؟</span>
                         الضحية جهازها يفتش عن الشبكة اللي كانت متوصلة فيها قبل (remembered networks). المهاجم يدير AP
                         بنفس الـSSID والـsignal أقوى فالضحية توصل به بدون ما تسأل.
@@ -763,6 +802,12 @@
                         </ul>
                         <span class="label">الحماية</span>
                         Prepared statements، Parameterized queries، Input validation، Least privilege.
+                        <span class="label">ممارسات إضافية</span>
+                        <ul class="bullet">
+                            <li>سجل وروديات الـqueries المشبوهة وحطّ حد للمدخلات غير المتوقعة.</li>
+                            <li>اعمل فحص دوري للـORM والـframework المستخدم لأن بعض الإعدادات قد تعطل الحماية التلقائية.
+                            </li>
+                        </ul>
                         <span class="label">❓ SQL Injection types - In-band vs Blind vs Out-of-band؟</span>
                         In-band = النتائج visible مباشرة. Blind = ما يرجع نتائج بصح المهاجم يقدر يستنتج بـtrue/false
                         tests. Out-of-band = يستعمل قناة ثانية (مثلاً DNS exfiltration).
@@ -789,6 +834,11 @@
                         سرقة cookies/sessions، keylogging، redirect لمواقع خبيثة.
                         <span class="label">الحماية</span>
                         Input sanitization، Output encoding، Content Security Policy (CSP)، HttpOnly cookies.
+                        <span class="label">نصائح عملية</span>
+                        <ul class="bullet">
+                            <li>استعمل CSP صارم يمنع تحميل السكربتات من مصادر غير موثوقة ويقلل من أثر XSS.</li>
+                            <li>اجعل كل الكوكيز الحساسة `Secure` و`HttpOnly` وقيّم استخدام SameSite.</li>
+                        </ul>
                         <span class="label">❓ XSS types - Stored vs Reflected vs DOM-based؟</span>
                         Stored = الـscript يتخزن في الـDB وينفذ لكل المستخدمين. Reflected = في الـURL ويرجع مباشرة في
                         الـHTML. DOM-based = يغير الـDOM على الـclient side بدون server involvement.
@@ -817,6 +867,12 @@
                         بصح Worm أخطر.
                         <span class="label">الموضوع: إنشاء فيروس وإضافته لتطبيق</span>
                         الـTrojan نموذج — يبدو تطبيق عادي لكنه يحتوي كود خبيث في الخلفية.
+                        <span class="label">ملاحظات أمنية</span>
+                        <ul class="bullet">
+                            <li>لا تختبر تطوير أو نشر برمجيات خبيثة على أنظمة حية — استخدم بيئات معزولة (VMs/labs).</li>
+                            <li>تعلّم كيف تتعرف الأدوات الأمنية على الـmalware (signatures, heuristics) لتحسين الدفاع.
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -841,6 +897,12 @@
                         Admin ← كل الصلاحيات | Editor ← قراءة وكتابة | Viewer ← قراءة فقط
                         <span class="label">الفائدة</span>
                         سهولة الإدارة، تقليل الخطر، امتثال أسهل للـcompliance.
+                        <span class="label">نقاط تنفيذية</span>
+                        <ul class="bullet">
+                            <li>راجع الأذونات دورياً وتحقّق من عدم تزايد صلاحيات الأدوار بمرور الوقت (privilege creep).
+                            </li>
+                            <li>استخدم سياسات مبنية على الدور مع قواعد واضحة لإدارة كيفية إضافة/تعديل الأدوار.</li>
+                        </ul>
                         <span class="label">❓ RBAC principle - Least Privilege شنو معناه؟</span>
                         كل مستخدم يأخذ الحد الأدنى من الـpermissions اللي يحتاجها لـrole ديالو. مثلاً Viewer ما يقدر
                         يعدل، Admin بس يقدر يحذف.
@@ -870,6 +932,12 @@
                         Exploit = الباب اللي تدخل منه | Payload = شنو دخلت تدير
                         <span class="label">الاستعمال الشرعي</span>
                         Penetration testing مرخص، اختبار أنظمة الحماية.
+                        <span class="label">ممارسات آمنة</span>
+                        <ul class="bullet">
+                            <li>اجعل استخدام Metasploit داخل بيئة اختبار مع موافقة كتابية، وتوثيق كل الاختبارات
+                                والنتائج.</li>
+                            <li>احذر من تشغيل payloads على أنظمة إنتاجية أو مشاركة شفرات خطرة دون رقابة.</li>
+                        </ul>
                         <span class="label">❓ Exploit vs Payload في Metasploit؟</span>
                         Exploit = الكود اللي يستغل الثغرة (الباب). Payload = ما يتنفذ بعد النجاح (reverse shell,
                         Meterpreter, etc).
@@ -902,6 +970,13 @@
                         (passive). IPS = IDS + blocking.res.
                         <span class="label">الفرق: Suricata مقابل Zeek</span>
                         Suricata = detection/blocking بـsignatures | Zeek = تحليل عميق للـbehavior
+                        <span class="label">نقاط تشغيلية</span>
+                        <ul class="bullet">
+                            <li>اجمع logs من كليهما للحصول على صورة متكاملة: Suricata للـalerts وZeek للـcontext
+                                والتحليل.</li>
+                            <li>حدّث قواعد الـIDS/IPS بانتظام وقلّل الـfalse positives عبر تهيئة القواعد حسب البيئة.
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -927,6 +1002,11 @@
                         <span class="label">❓ Prevent SQL injection؟</span>
                         Use Prepared Statements / Parameterized Queries — تفصل الـSQL code عن الـuser data بحيث
                         الـinjection مستحيلة.
+                        <span class="label">تأكيد وفحص</span>
+                        <ul class="bullet">
+                            <li>ادمج فحوصات الأمان ضمن CI/CD (SAST/DAST) لاكتشاف نقاط الضعف مبكراً.</li>
+                            <li>نفّذ اختبارات دورية باستخدام أدوات أوتوماتيكية مثل sqlmap في بيئة مختبرة.</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -952,6 +1032,12 @@
                         <span class="label">أوامر أساسية</span>
                         <pre class="codeblock">openssl enc -aes-256-cbc -in file.txt -out file.enc
 openssl dgst -sha256 file.txt</pre>
+                        <span class="label">نقاط حماية</span>
+                        <ul class="bullet">
+                            <li>لا تستخدم MD5 أو SHA1 لتخزين كلمات المرور — استعمل bcrypt أو Argon2.</li>
+                            <li>حفظ المفاتيح الخاصة يجب أن يكون في مخزن آمن (HSM أو key vault) وليس في ملفات plain-text.
+                            </li>
+                        </ul>
                         <span class="label">❓ OpenSSL usage?</span>
                         Encrypting/decrypting data، generating SSL/TLS certificates، hashing files، creating key pairs
                         (RSA/AES operations).
@@ -980,6 +1066,11 @@ openssl dgst -sha256 file.txt</pre>
                         </ul>
                         <span class="label">❓ Most important SSH hardening practice؟</span>
                         Disable SSH root login وتستخدم SSH keys بدل passwords. يقلل جداً من brute force attacks.
+                        <span class="label">إجراءات إضافية</span>
+                        <ul class="bullet">
+                            <li>استعمل auditd وسجلات مركزية (syslog/ELK) لمراقبة محاولات الدخول وفشلها.</li>
+                            <li>قيّم أمان الخدمات بعد كل تحديث أو تركيب برمجيات جديدة.</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -1008,6 +1099,12 @@ openssl dgst -sha256 file.txt</pre>
                         (detection + severity ranking + remediation recommendations).
                         <span class="label">الاستعمال</span>
                         Vulnerability assessment، compliance checks، penetration testing.
+                        <span class="label">إستراتيجية الفحص</span>
+                        <ul class="bullet">
+                            <li>ابدأ بعمل baseline للتعرّف على الثغرات الحرجة ثم رتّب الأولويات حسب الـrisk وimpact.
+                            </li>
+                            <li>ادمج نتائج Nessus مع نظام تتبع الثغرات لمتابعة الإصلاح والتحقق من الإغلاق.</li>
+                        </ul>
                     </div>
                 </div>
 

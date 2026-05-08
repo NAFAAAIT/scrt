@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security QCM – Study Guide</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --card: #16161f;
+            --border: #2a2a3a;
+            --accent: #00e5ff;
+            --accent2: #ff3d71;
+            --accent3: #a8ff3e;
+            --text: #e8e8f0;
+            --muted: #8888aa;
+            --yellow: #ffd600;
+            --font-ar: 'Cairo', sans-serif;
+            --font-en: 'Syne', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-ar);
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        /* ─── HEADER ─────────────────────────────────────────── */
+        header {
+            background: linear-gradient(135deg, #0a0a0f 0%, #0d0d1a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 20px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            text-align: right;
+        }
+
+        header h1 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--accent);
+            font-family: var(--font-ar);
+        }
+
+        header p {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 4px;
+            font-family: var(--font-mono);
+            direction: ltr;
+            text-align: left;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 6px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+            direction: rtl;
+        }
+
+        .tab {
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            font-family: var(--font-ar);
+            font-size: 0.82rem;
+            font-weight: 700;
+            transition: all .2s;
+        }
+
+        .tab.active,
+        .tab:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        /* ─── MAIN ────────────────────────────────────────────── */
+        main {
+            padding: 16px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 16px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+            direction: ltr;
+            text-align: left;
+        }
+
+        .search-bar {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--text);
+            font-family: var(--font-ar);
+            font-size: 0.88rem;
+            margin-bottom: 14px;
+            outline: none;
+            transition: border-color .2s;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .search-bar:focus {
+            border-color: var(--accent);
+        }
+
+        .search-bar::placeholder {
+            color: var(--muted);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* ─── TOPIC CARDS ─────────────────────────────────────── */
+        .topic-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .topic-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+            border-right: 3px solid var(--accent);
+            border-left: none;
+            transition: border-color .2s;
+        }
+
+        .topic-card:nth-child(2n) {
+            border-right-color: var(--accent2);
+        }
+
+        .topic-card:nth-child(3n) {
+            border-right-color: var(--accent3);
+        }
+
+        .topic-card:nth-child(4n) {
+            border-right-color: var(--yellow);
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            direction: rtl;
+        }
+
+        .toggle-icon {
+            color: var(--muted);
+            font-size: 1.1rem;
+            transition: transform .3s;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .topic-num {
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            direction: ltr;
+            flex-shrink: 0;
+        }
+
+        .topic-card:nth-child(2n) .topic-num {
+            background: var(--accent2);
+            color: #fff;
+        }
+
+        .topic-card:nth-child(3n) .topic-num {
+            background: var(--accent3);
+            color: #000;
+        }
+
+        .topic-card:nth-child(4n) .topic-num {
+            background: var(--yellow);
+            color: #000;
+        }
+
+        .topic-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            flex: 1;
+            font-family: var(--font-en);
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* ─── TOPIC BODY ──────────────────────────────────────── */
+        .topic-body {
+            display: none;
+            margin-top: 12px;
+            font-size: 0.88rem;
+            line-height: 1.85;
+            color: #c8c8e0;
+            direction: rtl;
+            text-align: right;
+            font-family: var(--font-ar);
+        }
+
+        .topic-body.open {
+            display: block;
+        }
+
+        .topic-body .tag {
+            display: inline-block;
+            background: #1e1e2e;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 7px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent);
+            margin: 2px 2px;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+
+        .label {
+            color: var(--yellow);
+            font-weight: 700;
+            margin-top: 10px;
+            display: block;
+            font-size: 0.78rem;
+            letter-spacing: .3px;
+            font-family: var(--font-ar);
+            text-align: right;
+        }
+
+        .bullet {
+            margin-right: 20px;
+            margin-left: 0;
+            margin-top: 6px;
+            list-style-position: outside;
+        }
+
+        .bullet li {
+            margin-bottom: 6px;
+            direction: rtl;
+            text-align: right;
+        }
+
+        pre.codeblock {
+            background: #08080d;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent3);
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent3);
+            direction: ltr;
+            text-align: left;
+            white-space: pre-wrap;
+            word-break: break-all;
+            unicode-bidi: isolate;
+            overflow-x: auto;
+        }
+
+        /* ─── QCM CARDS ───────────────────────────────────────── */
+        .qcm-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .q-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .q-num {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--muted);
+            margin-bottom: 5px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .q-text {
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+            color: var(--text);
+            direction: ltr;
+            text-align: left;
+            font-family: var(--font-en);
+        }
+
+        .q-answer {
+            background: #0d1f0d;
+            border: 1px solid #2a4a2a;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 0.82rem;
+            color: var(--accent3);
+            line-height: 1.65;
+            direction: ltr;
+            text-align: left;
+            font-family: var(--font-en);
+        }
+
+        .q-answer .ans-label {
+            color: var(--accent3);
+            font-weight: 700;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🔐 Security QCM – دليل المراجعة</h1>
+        <p>// 17 موضوع + 50 سؤال QCM مع الإجابات</p>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('topics')">📚 المواضيع</button>
+            <button class="tab" onclick="showTab('qcm')">❓ إجابات QCM</button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ========== TOPICS ========== -->
+        <div id="tab-topics">
+            <p class="section-title">// click any topic to expand</p>
+            <input class="search-bar" id="topicSearch" placeholder="🔍 ابحث عن موضوع..." oninput="filterTopics()">
+            <div class="topic-grid" id="topicGrid">
+
+                <!-- 01 -->
+                <div class="topic-card" data-title="Wireshark">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">01</span>
+                        <span class="topic-title">Wireshark</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        Wireshark هو <strong>network packet analyzer</strong> — يلتقط ويحلل كل الـpackets اللي تعدي على
+                        الشبكة في real-time.
+                        <span class="label">كيفاش يشتغل؟</span>
+                        يحط الـnetwork interface في <em>promiscuous mode</em> ← يلتقط كل الـframes ← يعرض محتوياتها
+                        (protocol, source, destination, data).
+                        <span class="label">الفرق: SSH مقابل Telnet</span>
+                        <ul class="bullet">
+                            <li><span class="tag">SSH</span> — كل البيانات مشفرة، Wireshark يشوف الـpackets بصح ما يقرا
+                                محتواهم</li>
+                            <li><span class="tag">Telnet</span> — بيانات plain text، Wireshark يشوف حتى الـpassword
+                                مباشرة!</li>
+                        </ul>
+                        <span class="label">استعمالاته</span>
+                        تشخيص مشاكل الشبكة، كشف الهجمات، تعلم البروتوكولات.
+                    </div>
+                </div>
+
+                <!-- 02 -->
+                <div class="topic-card" data-title="Nmap">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">02</span>
+                        <span class="topic-title">Nmap</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        <strong>Network Mapper</strong> — أداة مفتوحة المصدر لـ<em>port scanning</em> واكتشاف الأجهزة
+                        على الشبكة.
+                        <span class="label">كيفاش يشتغل؟</span>
+                        يبعث packets خاصة للـhost ← يحلل الردود ← يعرف: شكون على الشبكة، شنو الـports المفتوحة، شنو
+                        الـservices الشغالة، شنو الـOS.
+                        <span class="label">أهم الـOptions</span>
+                        <ul class="bullet">
+                            <li><span class="tag">-sS</span> SYN Scan (stealth) — ما يكملش الـhandshake</li>
+                            <li><span class="tag">-O</span> OS detection</li>
+                            <li><span class="tag">-sV</span> Service version detection</li>
+                            <li><span class="tag">-p</span> تحديد ports معينة</li>
+                        </ul>
+                        <span class="label">الاستعمال</span>
+                        Penetration testing، network auditing، security assessment.
+                    </div>
+                </div>
+
+                <!-- 03 -->
+                <div class="topic-card" data-title="Shodan">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">03</span>
+                        <span class="topic-title">Shodan</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        <strong>موتور بحث للأجهزة المتصلة بالإنترنت</strong> — servers، cameras، routers، IoT devices.
+                        مش زي Google اللي يبحث في المواقع.
+                        <span class="label">كيفاش يشتغل؟</span>
+                        يسكان الإنترنت باستمرار ← يجمع بيانات الـbanners (المعلومات اللي ترجع من الخدمات) ← يفهرسها في
+                        قاعدة بيانات قابلة للبحث.
+                        <span class="label">شنو تلقى فيه؟</span>
+                        <ul class="bullet">
+                            <li>Devices مفتوحة بدون password</li>
+                            <li>Servers ضعيفة (vulnerable services)</li>
+                            <li>Cameras صناعية أو منزلية مكشوفة</li>
+                        </ul>
+                        <span class="label">كيفاش تحمي راسك منه؟</span>
+                        تغلق الـports غير الضرورية، تستعمل firewall، تحمي الخدمات بـpassword وتشفير.
+                    </div>
+                </div>
+
+                <!-- 04 -->
+                <div class="topic-card" data-title="ARP Protocol Simulation Packet Tracer">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">04</span>
+                        <span class="topic-title">ARP Protocol &amp; Simulation</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو ARP؟</span>
+                        <strong>Address Resolution Protocol</strong> — يحول الـIP address إلى MAC address داخل نفس
+                        الشبكة (LAN).
+                        <span class="label">كيفاش يشتغل؟</span>
+                        <ul class="bullet">
+                            <li>الجهاز A عنده IP ديال B، يبغي MAC ديالها</li>
+                            <li>يبعث <span class="tag">ARP Request</span> broadcast: "شكون عنده هاذ الـIP؟"</li>
+                            <li>الجهاز B يرد بـ<span class="tag">ARP Reply</span>: "أنا، وهاذ هو MAC ديالي"</li>
+                            <li>الجهاز A يخزن الجواب في الـ<span class="tag">ARP Cache</span></li>
+                        </ul>
+                        <span class="label">Packet Tracer</span>
+                        نشبه هاذ العملية بـsimulation — نشوف الـpackets وهي تمشي بين الأجهزة خطوة خطوة.
+                    </div>
+                </div>
+
+                <!-- 05 -->
+                <div class="topic-card" data-title="ARP Poisoning">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">05</span>
+                        <span class="topic-title">ARP Poisoning</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        هجوم يبعث فيه المهاجم <strong>ARP Replies مزورة</strong> على الشبكة باش يربط MAC ديالو بـIP ديال
+                        شخص ثاني.
+                        <span class="label">النتيجة؟</span>
+                        الأجهزة ترسل بياناتها للمهاجم بدل الوجهة الحقيقية ← <strong>Man-in-the-Middle (MitM)</strong>
+                        <span class="label">مثال</span>
+                        <ul class="bullet">
+                            <li>المهاجم يقول للـPC: "أنا هو الـGateway"</li>
+                            <li>يقول للـGateway: "أنا هو الـPC"</li>
+                            <li>كل الترافيك يعدي عليه!</li>
+                        </ul>
+                        <span class="label">الحماية</span>
+                        Dynamic ARP Inspection (DAI)، Static ARP entries، HTTPS.
+                    </div>
+                </div>
+
+                <!-- 06 -->
+                <div class="topic-card" data-title="Brute Force Attack">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">06</span>
+                        <span class="topic-title">Brute Force Attack</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        هجوم يجرب فيه المهاجم <strong>كل الاحتمالات الممكنة</strong> للـpassword أو الـkey حتى يلقى
+                        الصح.
+                        <span class="label">الأنواع</span>
+                        <ul class="bullet">
+                            <li><span class="tag">Pure Brute Force</span> — يجرب كل التركيبات (abc, abd, abe...)</li>
+                            <li><span class="tag">Dictionary Attack</span> — يستعمل قائمة passwords شائعة</li>
+                            <li><span class="tag">Rainbow Table</span> — يستعمل hashes محسوبة مسبقاً</li>
+                        </ul>
+                        <span class="label">الحماية</span>
+                        Account lockout، CAPTCHA، rate limiting، passwords طويلة ومعقدة، MFA.
+                    </div>
+                </div>
+
+                <!-- 07 -->
+                <div class="topic-card" data-title="Evil Twin Attack WiFi">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">07</span>
+                        <span class="topic-title">Evil Twin Attack</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        المهاجم يدير <strong>نقطة WiFi مزورة</strong> بنفس اسم الشبكة الحقيقية (SSID) وسيغنال أقوى —
+                        الضحية تتوصل بيها بدون ما تعرف.
+                        <span class="label">كيفاش يشتغل؟</span>
+                        <ul class="bullet">
+                            <li>المهاجم يسكان الشبكات الموجودة</li>
+                            <li>يدير AP مزور بنفس الـSSID</li>
+                            <li>يقوي الـsignal → الضحية تتوصل به أوتوماتيك</li>
+                            <li>يسرق البيانات أو يعمل MitM</li>
+                        </ul>
+                        <span class="label">الهدف</span>
+                        سرقة credentials، intercept traffic، تركيب malware.
+                        <span class="label">الحماية</span>
+                        تحقق من الـcertificate (HTTPS)، استعمل VPN، تجنب الـWiFi العام.
+                    </div>
+                </div>
+
+                <!-- 08 -->
+                <div class="topic-card" data-title="SQL Injection">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">08</span>
+                        <span class="topic-title">SQL Injection</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        المهاجم يحقن <strong>كود SQL خبيث</strong> في مدخلات التطبيق ← يغير منطق الـquery ← يتحكم في
+                        قاعدة البيانات.
+                        <span class="label">مثال</span>
+                        <pre class="codeblock">username: admin' OR '1'='1
+-- Result: query always returns TRUE → login without password!</pre>
+                        <span class="label">الأنواع</span>
+                        <ul class="bullet">
+                            <li><span class="tag">In-band</span> — يرجع النتائج مباشرة</li>
+                            <li><span class="tag">Blind</span> — ما يرجع شي بصح يقدر يستنتج</li>
+                            <li><span class="tag">Out-of-band</span> — يستعمل قناة ثانية</li>
+                        </ul>
+                        <span class="label">الحماية</span>
+                        Prepared statements، Parameterized queries، Input validation، Least privilege.
+                    </div>
+                </div>
+
+                <!-- 09 -->
+                <div class="topic-card" data-title="XSS Cross-Site Scripting">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">09</span>
+                        <span class="topic-title">XSS – Cross-Site Scripting</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        المهاجم يحقن <strong>JavaScript خبيث</strong> في صفحة ويب ← يتنفذ في browser ديال الضحية.
+                        <span class="label">الأنواع</span>
+                        <ul class="bullet">
+                            <li><span class="tag">Stored XSS</span> — الـscript يتخزن في الـDB ويتعرض لكل الزوار</li>
+                            <li><span class="tag">Reflected XSS</span> — الـscript في الـURL يرجع مباشرة</li>
+                            <li><span class="tag">DOM-based</span> — يغير الـDOM مباشرة بدون سيرفر</li>
+                        </ul>
+                        <span class="label">الخطر</span>
+                        سرقة cookies/sessions، keylogging، redirect لمواقع خبيثة.
+                        <span class="label">الحماية</span>
+                        Input sanitization، Output encoding، Content Security Policy (CSP)، HttpOnly cookies.
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="topic-card" data-title="Malware Virus Trojan Ransomware">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">10</span>
+                        <span class="topic-title">Malware – Virus, Trojan, Ransomware</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">الفروقات الأساسية</span>
+                        <ul class="bullet">
+                            <li><span class="tag">Virus</span> — يرفق بـfiles ويتكاثر، يحتاج تنفيذ بشري</li>
+                            <li><span class="tag">Worm</span> — يتكاثر وحده بدون مساعدة</li>
+                            <li><span class="tag">Trojan</span> — يتنكر كـsoftware شرعي (الحصان الطروادة)</li>
+                            <li><span class="tag">Ransomware</span> — يشفر الملفات ويطلب فدية</li>
+                            <li><span class="tag">Spyware</span> — يتجسس ويسرق معلومات</li>
+                            <li><span class="tag">Rootkit</span> — يخفي نفسه ويتحكم في النظام</li>
+                        </ul>
+                        <span class="label">الموضوع: إنشاء فيروس وإضافته لتطبيق</span>
+                        الـTrojan نموذج — يبدو تطبيق عادي لكنه يحتوي كود خبيث في الخلفية.
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="topic-card" data-title="RBAC Role Based Access Control">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">11</span>
+                        <span class="topic-title">RBAC – Role-Based Access Control</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        نظام صلاحيات يعطي كل مستخدم حقوق بناءً على <strong>دوره (Role)</strong> وليس هويته الشخصية.
+                        <span class="label">المبادئ</span>
+                        <ul class="bullet">
+                            <li><span class="tag">Least Privilege</span> — كل شخص ياخذ الحد الأدنى من الصلاحيات اللي
+                                يحتاجها</li>
+                            <li><span class="tag">Role</span> = مجموعة صلاحيات: Admin, User, Moderator</li>
+                            <li><span class="tag">Separation of Duties</span> — تفريق المهام الحساسة</li>
+                        </ul>
+                        <span class="label">مثال</span>
+                        Admin ← كل الصلاحيات | Editor ← قراءة وكتابة | Viewer ← قراءة فقط
+                        <span class="label">الفائدة</span>
+                        سهولة الإدارة، تقليل الخطر، امتثال أسهل للـcompliance.
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="topic-card" data-title="Metasploit Exploit Payload">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">12</span>
+                        <span class="topic-title">Metasploit</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        <strong>Framework متكامل للـpenetration testing</strong> — يحتوي آلاف الـexploits والـpayloads
+                        جاهزة للاستخدام.
+                        <span class="label">المفاهيم الأساسية</span>
+                        <ul class="bullet">
+                            <li><span class="tag">Exploit</span> — الكود اللي يستغل الثغرة</li>
+                            <li><span class="tag">Payload</span> — ما يتنفذ بعد نجاح الاستغلال (مثلاً reverse shell)
+                            </li>
+                            <li><span class="tag">Module</span> — وحدة قابلة للاستخدام (auxiliary, exploit, post)</li>
+                            <li><span class="tag">msfconsole</span> — واجهة الأوامر</li>
+                        </ul>
+                        <span class="label">الفرق: Exploit مقابل Payload</span>
+                        Exploit = الباب اللي تدخل منه | Payload = شنو دخلت تدير
+                        <span class="label">الاستعمال الشرعي</span>
+                        Penetration testing مرخص، اختبار أنظمة الحماية.
+                    </div>
+                </div>
+
+                <!-- 13 -->
+                <div class="topic-card" data-title="IDS IPS Suricata Zeek">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">13</span>
+                        <span class="topic-title">IDS / IPS – Suricata &amp; Zeek</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">IDS مقابل IPS</span>
+                        <ul class="bullet">
+                            <li><span class="tag">IDS</span> Intrusion Detection System — يكشف الهجمات ويرسل تنبيه فقط
+                                (passive)</li>
+                            <li><span class="tag">IPS</span> Intrusion Prevention System — يكشف <strong>ويبلوك</strong>
+                                الهجمات (active)</li>
+                        </ul>
+                        <span class="label">Suricata</span>
+                        أداة مفتوحة المصدر تشتغل كـIDS وIPS وNSM. تحلل الترافيك بـrules وتكشف الهجمات في real-time. يدعم
+                        وضعين: IDS (يسجل فقط) وIPS (يبلوك).
+                        <span class="label">Zeek (Bro سابقاً)</span>
+                        <strong>Network Security Monitor</strong> — مش IDS تقليدي، يحلل الترافيك ويولد logs مفصلة
+                        (connections, DNS, HTTP). Focus على الـanalysis والـbehavior مش الـsignatures.
+                        <span class="label">الفرق: Suricata مقابل Zeek</span>
+                        Suricata = detection/blocking بـsignatures | Zeek = تحليل عميق للـbehavior
+                    </div>
+                </div>
+
+                <!-- 14 -->
+                <div class="topic-card" data-title="SQL Injection Prevention">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">14</span>
+                        <span class="topic-title">SQL Injection – Simulation &amp; Prevention</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">Simulation</span>
+                        استعمال أدوات مثل <span class="tag">sqlmap</span> أو <span class="tag">Burp Suite</span> لاختبار
+                        الثغرات في بيئة lab آمنة.
+                        <span class="label">أفضل ممارسات الحماية</span>
+                        <ul class="bullet">
+                            <li><span class="tag">Prepared Statements</span> — تفصل الكود عن البيانات</li>
+                            <li><span class="tag">Input Validation</span> — ترفض المدخلات الخطرة</li>
+                            <li><span class="tag">WAF</span> — Web Application Firewall</li>
+                            <li><span class="tag">Least Privilege</span> — الـDB user ماعندوش أكثر من اللي يحتاج</li>
+                            <li>تجنب <span class="tag">Dynamic SQL</span> — ما تبنيش queries من strings مباشرة</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 15 -->
+                <div class="topic-card" data-title="OpenSSL Chiffrement Hachage Encryption">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">15</span>
+                        <span class="topic-title">OpenSSL – Chiffrement &amp; Hachage</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو OpenSSL؟</span>
+                        مكتبة مفتوحة المصدر توفر أدوات للـ<strong>cryptography</strong>: تشفير، hashing، SSL/TLS
+                        certificates.
+                        <span class="label">الـChiffrement (التشفير)</span>
+                        <ul class="bullet">
+                            <li><span class="tag">Symmetric</span> — نفس المفتاح للتشفير والفك (AES)</li>
+                            <li><span class="tag">Asymmetric</span> — مفتاح عام + خاص (RSA)</li>
+                        </ul>
+                        <span class="label">الـHachage</span>
+                        دالة تحول البيانات لـhash ثابت الطول — أحادي الاتجاه (MD5, SHA-256). الاستعمال: التحقق من سلامة
+                        الملفات، تخزين passwords.
+                        <span class="label">أوامر أساسية</span>
+                        <pre class="codeblock">openssl enc -aes-256-cbc -in file.txt -out file.enc
+openssl dgst -sha256 file.txt</pre>
+                    </div>
+                </div>
+
+                <!-- 16 -->
+                <div class="topic-card" data-title="Hardening Linux Server">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">16</span>
+                        <span class="topic-title">Hardening Linux Server</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        تقليص سطح الهجوم بتأمين الـserver — إزالة كل ما هو غير ضروري وتقوية الإعدادات.
+                        <span class="label">أهم الخطوات</span>
+                        <ul class="bullet">
+                            <li>تحديث النظام دائماً — <span class="tag">apt upgrade</span></li>
+                            <li>تعطيل الـservices غير المستخدمة</li>
+                            <li>إعداد <span class="tag">firewall</span> (iptables / ufw)</li>
+                            <li>تعطيل SSH root login</li>
+                            <li>استخدام <span class="tag">SSH keys</span> بدل passwords</li>
+                            <li>تفعيل <span class="tag">fail2ban</span> للحماية من brute force</li>
+                            <li>إعداد <span class="tag">SELinux</span> أو <span class="tag">AppArmor</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 17 -->
+                <div class="topic-card" data-title="Nessus Vulnerability Scanner">
+                    <div class="topic-header" onclick="toggle(this)">
+                        <span class="topic-num">17</span>
+                        <span class="topic-title">Nessus – Vulnerability Scanner</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="topic-body">
+                        <span class="label">شنو هو؟</span>
+                        <strong>Vulnerability Assessment Tool</strong> — يسكان الأنظمة والشبكات ويكشف الثغرات الأمنية
+                        المعروفة.
+                        <span class="label">كيفاش يشتغل؟</span>
+                        <ul class="bullet">
+                            <li>يسكان الـports والـservices</li>
+                            <li>يقارن مع قاعدة بيانات CVEs</li>
+                            <li>يعطي تقرير مفصل مع severity (Critical / High / Medium / Low)</li>
+                        </ul>
+                        <span class="label">الفرق مع Nmap</span>
+                        <span class="tag">Nmap</span> = اكتشاف فقط | <span class="tag">Nessus</span> = اكتشاف + تقييم
+                        الثغرات + توصيات
+                        <span class="label">الاستعمال</span>
+                        Vulnerability assessment، compliance checks، penetration testing.
+                    </div>
+                </div>
+
+            </div><!-- /topic-grid -->
+        </div><!-- /tab-topics -->
+
+        <!-- ========== QCM ========== -->
+        <div id="tab-qcm" class="hidden">
+            <p class="section-title">// 50 questions with correct answers</p>
+            <input class="search-bar" id="qcmSearch" placeholder="🔍 ابحث عن سؤال..." oninput="filterQCM()">
+            <div class="qcm-grid" id="qcmGrid"></div>
+        </div>
+
+    </main>
+
+    <script>
+        const qcmData = [
+            { q: "A brute-force attack consists of:", a: "Trying all possible combinations of passwords/keys systematically until the correct one is found." },
+            { q: "What is an Evil Twin attack?", a: "A rogue Wi-Fi access point that mimics a legitimate AP (same SSID) to intercept victims' traffic." },
+            { q: "A SQL Injection attack works by:", a: "Inserting malicious SQL code into input fields to manipulate database queries and bypass authentication or extract data." },
+            { q: "Cross-Site Scripting (XSS):", a: "Injecting malicious client-side scripts (JavaScript) into web pages viewed by other users to steal sessions or cookies." },
+            { q: "Malware that disguises itself as legitimate software:", a: "Trojan (Trojan Horse) — appears harmless but contains malicious code." },
+            { q: "Malware that encrypts files and demands payment:", a: "Ransomware — encrypts victim's files and demands a ransom (usually cryptocurrency) for decryption." },
+            { q: "Attack that tries all combinations:", a: "Brute-Force Attack." },
+            { q: "Characteristic of brute-force:", a: "It is exhaustive and guaranteed to find the password eventually, but very slow for long/complex passwords." },
+            { q: "Purpose of Nmap:", a: "Network discovery and port scanning — identifies hosts, open ports, running services, and OS on a network." },
+            { q: "Mechanism to prove identity:", a: "Authentication — verifying who you are (password, biometrics, certificate, MFA)." },
+            { q: "Shodan main function:", a: "Search engine for internet-connected devices — indexes servers, cameras, routers, and IoT devices exposed online." },
+            { q: "Nessus main function:", a: "Vulnerability scanner — detects known security vulnerabilities in systems and networks, ranks them by severity." },
+            { q: "Nessus use in assessment:", a: "Performs automated vulnerability assessments by scanning systems and comparing findings against CVE databases." },
+            { q: "Shodan description:", a: "A search engine that crawls the internet and indexes information about exposed devices and services (banners, versions, open ports)." },
+            { q: "Wireshark use:", a: "Captures and analyzes network packets in real-time — used for network troubleshooting, protocol analysis, and detecting attacks." },
+            { q: "ARP poisoning:", a: "Attacker sends forged ARP replies to associate their MAC address with a legitimate IP, enabling Man-in-the-Middle attacks." },
+            { q: "IPS advantage over IDS:", a: "IPS actively blocks/drops malicious traffic in real-time, while IDS only detects and alerts (passive)." },
+            { q: "System that blocks traffic:", a: "IPS (Intrusion Prevention System) — actively blocks malicious traffic. A Firewall also blocks based on rules." },
+            { q: "Evil twin attack involves:", a: "Creating a rogue Wi-Fi AP with the same SSID as a legitimate network to trick users into connecting to it." },
+            { q: "Goal of evil twin:", a: "Intercepting network traffic, stealing credentials, performing MitM attacks, or injecting malware." },
+            { q: "Exploit in Metasploit:", a: "A module that takes advantage of a specific vulnerability in a target system to gain unauthorized access." },
+            { q: "HTTPS mitigates:", a: "Eavesdropping and MitM attacks by encrypting traffic — mitigates ARP poisoning data theft, Evil Twin interception, and session hijacking." },
+            { q: "IDS vs IPS:", a: "IDS = passive detection only (alerts). IPS = active detection + prevention (blocks traffic). IPS is IDS + blocking capability." },
+            { q: "Metasploit usage:", a: "Used for penetration testing — it automates exploitation of vulnerabilities using exploits and payloads to test system security." },
+            { q: "IDS analyzing traffic:", a: "IDS inspects network packets against known attack signatures or behavioral baselines and generates alerts on matches." },
+            { q: "OpenSSL library:", a: "Open-source cryptographic library implementing SSL/TLS protocols and providing tools for encryption, hashing, and certificate management." },
+            { q: "OpenSSL usage:", a: "Encrypting/decrypting data, generating SSL/TLS certificates, hashing files, creating key pairs (RSA/AES operations)." },
+            { q: "Penetration testing tool:", a: "Metasploit, Nmap, Nessus, Burp Suite, Kali Linux — tools used to simulate attacks and find vulnerabilities." },
+            { q: "RBAC principle:", a: "Least Privilege — users receive only the minimum permissions needed for their role, reducing attack surface." },
+            { q: "Role in RBAC:", a: "A named collection of permissions assigned to users (e.g., Admin, Editor, Viewer) — access is granted by role, not individual." },
+            { q: "Suricata modes:", a: "IDS mode (detect & log only) and IPS mode (detect & block traffic inline). Also supports NSM (Network Security Monitoring)." },
+            { q: "Suricata use:", a: "Real-time network traffic analysis using rules to detect/prevent intrusions, malware, and protocol anomalies." },
+            { q: "Tool for behavioral analysis:", a: "Zeek (formerly Bro) — analyzes network behavior and generates detailed logs rather than using signature-based detection." },
+            { q: "Zeek description:", a: "A passive network security monitor that analyzes traffic and produces rich logs (HTTP, DNS, SSL, connections) for forensic analysis." },
+            { q: "Zeek focus:", a: "Network behavior and traffic analysis — focuses on understanding what happened on the network rather than just blocking threats." },
+            { q: "Payload in Metasploit:", a: "The code that runs on the target after successful exploitation (e.g., reverse shell, Meterpreter session, command execution)." },
+            { q: "Penetration meaning:", a: "Authorized simulated attack on a system to find vulnerabilities before malicious attackers do — ethical hacking." },
+            { q: "Shodan usage:", a: "Discovering exposed devices, finding misconfigured services, researching attack surface of organizations, IoT security assessment." },
+            { q: "Prevent SQL injection:", a: "Use Prepared Statements / Parameterized Queries — separates SQL code from user data so injection is impossible." },
+            { q: "Practice to avoid (SQLi):", a: "Building SQL queries by string concatenation with user input (dynamic SQL without parameterization)." },
+            { q: "Practice to avoid (repeated):", a: "Storing passwords in plain text, using default credentials, trusting user input without validation." },
+            { q: "Prevent brute force:", a: "Account lockout after N attempts, CAPTCHA, rate limiting, strong password policy, MFA (Multi-Factor Authentication)." },
+            { q: "Prevent Shodan indexing:", a: "Close unnecessary ports, use firewalls, require authentication on all services, use non-standard ports, implement TLS." },
+            { q: "Exploit role:", a: "To leverage a specific vulnerability in a target system to gain unauthorized access or execute arbitrary code." },
+            { q: "Exploit vs payload:", a: "Exploit = the method to break in (the key). Payload = what you do once inside (the action after entry)." },
+            { q: "False positive:", a: "When an IDS/IPS incorrectly flags legitimate traffic as malicious — a benign event incorrectly identified as an attack." },
+            { q: "Most dangerous for IDS:", a: "False Negatives — when real attacks are NOT detected. Also: encrypted traffic (IDS can't inspect), evasion techniques." },
+            { q: "Protection against brute force:", a: "MFA, strong long passwords, account lockout, CAPTCHA, IP-based rate limiting, fail2ban." },
+            { q: "Reduce XSS risk (user):", a: "Keep browser updated, be cautious of suspicious links, use browser extensions (NoScript), don't trust unknown sites." },
+            { q: "0% security risk concept:", a: "'Zero risk' is impossible in cybersecurity — you can only reduce risk, not eliminate it entirely (risk mitigation, not risk elimination)." },
+        ];
+
+        function renderQCM(data) {
+            const grid = document.getElementById('qcmGrid');
+            grid.innerHTML = data.map((item, i) => `
+    <div class="q-card" data-q="${item.q.toLowerCase()}">
+    <div class="q-num" dir="ltr">Q${String(i + 1).padStart(2, '0')}</div>
+    <div class="q-text" dir="ltr">${item.q}</div>
+    <div class="q-answer" dir="ltr">
+        <span class="ans-label">✓ ANSWER</span>
+        ${item.a}
+    </div>
+    </div>
+`).join('');
+        }
+        renderQCM(qcmData);
+
+        function showTab(name) {
+            document.getElementById('tab-topics').classList.add('hidden');
+            document.getElementById('tab-qcm').classList.add('hidden');
+            document.getElementById('tab-' + name).classList.remove('hidden');
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', (name === 'topics' && i === 0) || (name === 'qcm' && i === 1));
+            });
+        }
+
+        function toggle(header) {
+            const body = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            body.classList.toggle('open');
+            icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+        }
+
+        function filterTopics() {
+            const q = document.getElementById('topicSearch').value.toLowerCase();
+            document.querySelectorAll('.topic-card').forEach(card => {
+                card.style.display = card.dataset.title.toLowerCase().includes(q) ? '' : 'none';
+            });
+        }
+
+        function filterQCM() {
+            const q = document.getElementById('qcmSearch').value.toLowerCase();
+            document.querySelectorAll('.q-card').forEach(card => {
+                card.style.display = card.dataset.q.includes(q) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+
+</html>
